@@ -40,6 +40,11 @@ p.lead {
   background: #555;
   color: #FFF;
 }
+::placeholder {
+  color: #eee;
+  line-height: 100%;
+  font-size: 16pt;
+}
 /* Main elements end */
 
 
@@ -208,4 +213,72 @@ h2.monospace {
 }
 .subtitle {
   opacity: 0.5;
+}
+a#big-home-button{
+  text-decoration: none;
+}
+a#big-home-button:hover{  
+  text-decoration: none;
+}
+
+/*****************************************************************************
+ * search bar styles 
+ ****************************************************************************/  
+#key{
+  width: 100%;
+  margin-bottom: 10px;
+  line-height: 50px;
+  background-color: #84da70;
+  font-size: 15pt;
+  color: white;
+  padding-left: 20px;
+  
+}
+
+/*****************************************************************************
+ * home header styles end
+ ****************************************************************************/
+#main-header h1{
+  color: black;
+  font-size: 100pt;
+  font-weight: bold;
+  font-weight: 520000;
+  font-family: 'helvetica', sans;
+}
+
+#main-header p{ 
+  color: black;
+  font-size: 15pt;
+  font-weight: 520000;
+  font-family: 'helvetica', sans;
+}
+/*****************************************************************************
+ * Unordered list styles
+ ****************************************************************************/
+
+ ul#nutrients{
+  list-style: none;
+ }
+ ul#nutrients li{
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: solid 1px #eee;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #63af69;
+ }
+
+ /*****************************************************************************
+  * Info-box styles
+  ****************************************************************************/
+div#info-box{
+  float: right;
+  width: 44%;
+  position: relative;
+  top: -20em;
+  display: none;
 }

@@ -1,21 +1,20 @@
 {% extends 'layouts/main.html' %}
 {% block title %}NutroMonkey{% endblock %}
 {% block content %}
+<header id="main-header">
+    <h1>Nutromonkey</h1>
+    <p>
+        Your daily nutrition tracker
+    </p>
+   
+</header>
 <div class="row">
-    <div class="col-md-6">
-        <h1>NutroMonkey</h1>
-        <p>
-        NutroMonkey is a web application that allows you to track your food intake.
-        It is designed to be easy to use and easy to understand.
-        </p>
+    <div class="col-md-12">
+            <form class="form" method="post" action="/search">
+              <input type="text" name="key" placeholder="Search it here" id="key">
+              Search by food name, brand name, or ingredient. This data is provided by the USDA.
+            </form>
     </div>  
-</div> 
-<div class="row">
-    <div class="col-md-6">
-        <form class="form" method="post" action="/search">
-          <input type="text" name="key" placeholder="Food name" id="key">
-          <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-    </div>
 </div>
+
 {% endblock %}
