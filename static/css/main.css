@@ -282,3 +282,17 @@ div#info-box{
   top: -25em;
   display: none;
 }
+
+ /*****************************************************************************
+  * additional info styles
+  ****************************************************************************/
+ p.additional-info{
+  font-size: 12pt;
+  display: inline-block;
+  background-color: yellow;
+  margin-left: 35px;
+  margin-top: -10px;
+  font-style: italic;
+  }
+  
+  
