@@ -14,12 +14,18 @@ $(document).ready(function() {
       type: 'GET',
       dataType: 'json',
       success: function(data) {
-        // alert(data.data)
+        // scroll to the info-box div
+        // $('html, body').animate({
+        //   scrollTop: $("#info-box").offset().top
+        // }, 2000);
+        // set the info-box div title
         $("#info-title").html(selected_value.split(',')[0])
+        // remove the loading animation
         $(".loader").css('display', 'none');
+        // set the info-box div content and show it
         $("#info-text").html(data.data)
         $("#info-box").css("display", "block");
-
+       
       }
     });
 

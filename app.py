@@ -19,8 +19,6 @@ def index():
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     key = request.form['key']
-    wiki_result = wikipedia.summary(f'{key} in diet')
-    print(wiki_result)
     try:
         response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search?query='+key+'&pageSize=2&api_key=Hal64gsGkYVlg6bhIAn5zQoLR6GqbuSzWa5LsJLj')
         result = json.loads(response.text)
@@ -44,8 +42,11 @@ def lookup(keyword):
             keyword = ' '.join(re.findall('[A-Za-z]+', keyword))
         nutrient = keyword.split(',')[0]
         search_key = f'{nutrient} in diet'
-        wiki_result = wikipedia.summary(search_key, sentences=5)
-        print(wiki_result)
+        try:
+            wiki_result = wikipedia.summary(search_key, sentences=5)
+        except:
+            wiki_result = 'No result found'
+        # print(wiki_result)
      
         return jsonify(data=wiki_result) 
 

@@ -6,7 +6,6 @@
     <p>
         Your daily nutrition tracker
     </p>
-   
 </header>
 <div class="row">
     <div class="col-md-12">
@@ -19,7 +18,7 @@
     <div class="col-md-6">
         <h2>So, What do we got in:  {{item}}?</h2>
         <p>
-        This Nutritional information is based on the provided by the USDA.
+        This Nutritional information is based on the data provided by USDA.
         </p>
         <canvas id="myChart" width="400" height="400"></canvas>
         <script>
@@ -27,7 +26,6 @@
             const myChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                 labels: [
                     {% for nutrient, value in resultdata.items() %}
                         '{{ nutrient }}',
@@ -66,18 +64,26 @@
         </script>
      </div>
      <div class="col-md-6">
-        <h3 {% if not item %}class="hidden"{% endif %}>Learn more aboute each nutrient in <em>{{ item }}</em></h3>
+        <h3 {% if not item %}class="hidden"{% endif %}>Learn more about each nutrient in <em>{{ item }}</em></h3>
         <ul id="nutrients">
         {% for nutrient, value in resultdata.items() %}
             <li><a href="/lookup/{{nutrient | safe}}">{{ nutrient }}</a></li>
         {% endfor %}
         </ul>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="loader">Loading...</div>
+            <div id="info-box">
+                <h3 id="info-title"></h3>
+                <p id="info-text"></p>
+            </div> 
+        </div>
+    </div>
  </div>
- <div class="loader">Loading...</div>
- <div id="info-box">
-    <h3 id="info-title">Info Title</h3>
-    <p id="info-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus voluptatem quidem vero excepturi sit distinctio, incidunt quia voluptate doloremque dolor, maiores, nihil voluptates voluptatum placeat corporis cumque perspiciatis recusandae et.</p>
-</div> 
+
+
+
+ 
         
 {% endblock %}
