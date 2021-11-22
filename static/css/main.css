@@ -258,6 +258,7 @@ a#big-home-button:hover{
 
  ul#nutrients{
   list-style: none;
+  padding-left: 5px;
  }
  ul#nutrients li{
   display: inline-block;
@@ -276,10 +277,10 @@ a#big-home-button:hover{
   * Info-box styles
   ****************************************************************************/
 div#info-box{
-  float: right;
+  /* float: right;
   width: 44%;
   position: relative;
-  top: -25em;
+  top: -20em; */
   display: none;
 }
 
@@ -289,10 +290,11 @@ div#info-box{
  p.additional-info{
   font-size: 12pt;
   display: inline-block;
-  background-color: yellow;
-  margin-left: 35px;
-  margin-top: -10px;
+  /* background-color: yellow; */
+  /* margin-left: 35px; */
   font-style: italic;
+  color: grey;
   }
+
   
   

@@ -5,6 +5,8 @@ import wikipedia
 from flask.wrappers import Response
 from werkzeug.wrappers import response
 import re
+
+from wikipedia.wikipedia import API_URL
 # Create the application instance
 app = Flask(__name__)
 # Create secret key for session
@@ -18,12 +20,19 @@ def index():
 # Create a URL route in our application for "/search"
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    key = request.form['key']
+    keyword = request.form['key']
+    # pull additional data from wikipedia about the search term
     try:
-        response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search?query='+key+'&pageSize=2&api_key=Hal64gsGkYVlg6bhIAn5zQoLR6GqbuSzWa5LsJLj')
+        additional_info = wikipedia.summary(keyword, sentences=2)
+    except:
+        additional_info = ""
+    # get the first 10 results from usda api
+    try:
+        API_KEY = "Hal64gsGkYVlg6bhIAn5zQoLR6GqbuSzWa5LsJLj"
+        API_URL = "https://api.nal.usda.gov/fdc/v1/foods/search?query="+keyword+"&pageSize=2&api_key="+API_KEY
+        response = requests.get(API_URL)
         result = json.loads(response.text)
         data_dict = {data['nutrientName'] : data['value'] for data in result['foods'][0]['foodNutrients']}
-        additional_info = wikipedia.summary(key, sentences=1)#result['foods'][0]['additionalDescriptions']
         data = dict(sorted(data_dict.items(), key = lambda x: x[1])[-10:])
         label = list(data.keys())
         value = list(data.values())
@@ -31,10 +40,9 @@ def search():
         data = {}
         label = []
         value = []
-        flash('No result was found for keyword='+key)
-        additional_info = ""
+        flash('No result was found for keyword='+keyword)
 
-    return render_template('pages/search.html', resultdata=data, item=key, label=label, value=value, additional_info=additional_info)
+    return render_template('pages/search.html', resultdata=data, item=keyword, label=label, value=value, additional_info=additional_info)
 
 @app.route('/lookup/<keyword>')
 def lookup(keyword):
@@ -44,13 +52,11 @@ def lookup(keyword):
         if ',' not in keyword:
             keyword = ' '.join(re.findall('[A-Za-z]+', keyword))
         nutrient = keyword.split(',')[0]
-        search_key = f'{nutrient} in diet'
+        search_key = f'{nutrient} in food'
         try:
             wiki_result = wikipedia.summary(search_key, sentences=5)
         except:
             wiki_result = 'No result found'
-        # print(wiki_result)
-     
         return jsonify(data=wiki_result)
 
 @app.errorhandler(404)

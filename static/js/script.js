@@ -25,9 +25,25 @@ $(document).ready(function() {
         // set the info-box div content and show it
         $("#info-text").html(data.data)
         $("#info-box").css("display", "block");
-       
       }
     });
 
   });
+// show hide wiki description
+$(".wiki-description").on("click", function(e) {
+  e.preventDefault();
+  
+  if (e.target.tagName == "A") {
+    $(".additional-info").toggle();
+    if ($(".additional-info").is(":visible")) {
+      $("#show-more-less").html("Show Less");
+    }
+    else {
+      $("#show-more-less").html("Show More");
+    }
+
+  }
+
+});
+  
 });
