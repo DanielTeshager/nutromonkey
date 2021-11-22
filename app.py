@@ -3,10 +3,8 @@ import json
 import requests
 import wikipedia
 from flask.wrappers import Response
-from werkzeug.wrappers import response
-import re
-
 from wikipedia.wikipedia import API_URL
+
 # Create the application instance
 app = Flask(__name__)
 # Create secret key for session
@@ -41,9 +39,9 @@ def search():
         label = []
         value = []
         flash('No result was found for keyword='+keyword)
-
     return render_template('pages/search.html', resultdata=data, item=keyword, label=label, value=value, additional_info=additional_info)
 
+# auxillary function to get the data from the wikipedia API
 @app.route('/lookup/<keyword>')
 def lookup(keyword):
     if keyword == 'None':
@@ -59,9 +57,15 @@ def lookup(keyword):
             wiki_result = 'No result found'
         return jsonify(data=wiki_result)
 
+# Handles the page note found error
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('errors/404.html'), 404 
+
+# Handles the internal server error
+@app.errorhandler(500)
+def not_found_error(error):
+    return render_template('errors/500.html'), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
