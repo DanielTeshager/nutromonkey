@@ -4,6 +4,7 @@ import requests
 import wikipedia
 from flask.wrappers import Response
 from wikipedia.wikipedia import API_URL
+import re
 
 # Create the application instance
 app = Flask(__name__)
