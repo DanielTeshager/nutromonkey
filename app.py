@@ -27,7 +27,7 @@ def search():
         additional_info = ""
     # get the first 10 results from usda api
     try:
-        API_KEY = "Hal64gsGkYVlg6bhIAn5zQoLR6GqbuSzWa5LsJLj"
+        API_KEY = ""
         API_URL = "https://api.nal.usda.gov/fdc/v1/foods/search?query="+keyword+"&pageSize=2&api_key="+API_KEY
         response = requests.get(API_URL)
         result = json.loads(response.text)
